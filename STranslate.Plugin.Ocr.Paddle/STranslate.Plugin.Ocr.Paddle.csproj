@@ -1,6 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
+        <LangVersion>preview</LangVersion>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <EnableWindowsTargeting>true</EnableWindowsTargeting>
+        <RepositoryUrl>https://github.com/STranslate/STranslate.Plugin.Ocr.Paddle</RepositoryUrl>
+        <ManagePackageVersionsCentrally>false</ManagePackageVersionsCentrally>
+
         <TargetFramework>net9.0-windows</TargetFramework>
         <UseWPF>true</UseWPF>
         <UseWindowsForms>true</UseWindowsForms>
@@ -14,7 +21,8 @@
         <DebugSymbols>true</DebugSymbols>
         <DebugType>portable</DebugType>
         <Optimize>false</Optimize>
-        <OutputPath>..\.artifacts\Debug\</OutputPath>
+        <!--// 方便调试 //-->
+        <OutputPath>..\..\..\..\.artifacts\Debug\Plugins\STranslate.Plugin.Ocr.Paddle\</OutputPath>
         <DefineConstants>DEBUG;TRACE</DefineConstants>
         <ErrorReport>prompt</ErrorReport>
         <WarningLevel>4</WarningLevel>
@@ -24,7 +32,7 @@
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
         <DebugType>none</DebugType>
         <Optimize>true</Optimize>
-        <OutputPath>..\.artifacts\Release\</OutputPath>
+        <OutputPath>..\..\..\..\.artifacts\ThirdPlugins\STranslate.Plugin.Ocr.Paddle\</OutputPath>
         <DefineConstants>TRACE</DefineConstants>
         <ErrorReport>prompt</ErrorReport>
         <WarningLevel>4</WarningLevel>
@@ -48,11 +56,11 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Sdcb.OpenCvSharp4.mini.runtime.win-x64" />
-        <PackageReference Include="Sdcb.OpenVINO" />
-        <PackageReference Include="Sdcb.OpenVINO.PaddleOCR.Models.Online" />
-        <PackageReference Include="Sdcb.OpenVINO.runtime.win-x64" />
-        <PackageReference Include="STranslate.Plugin" />
+        <PackageReference Include="Sdcb.OpenCvSharp4.mini.runtime.win-x64" Version="4.11.0.35" />
+        <PackageReference Include="Sdcb.OpenVINO" Version="0.7.0" />
+        <PackageReference Include="Sdcb.OpenVINO.PaddleOCR.Models.Online" Version="0.7.0" />
+        <PackageReference Include="Sdcb.OpenVINO.runtime.win-x64" Version="2025.2.0.1" />
+        <PackageReference Include="STranslate.Plugin" Version="1.0.2" />
     </ItemGroup>
 
     <Target Name="CleanExtraDlls" AfterTargets="Build">

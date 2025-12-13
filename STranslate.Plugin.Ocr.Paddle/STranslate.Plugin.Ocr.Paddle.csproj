@@ -69,6 +69,7 @@
             <RedundantDlls Include="$(OutputPath)CommunityToolkit.Mvvm.dll" />
             <RedundantDlls Include="$(OutputPath)iNKORE.UI.WPF*.dll" />
             <RedundantDlls Include="$(OutputPath)Microsoft.Extensions*.dll" />
+            <RedundantDlls Include="$(OutputPath)STranslate.Plugin.dll" />
         </ItemGroup>
         <Delete Files="@(RedundantDlls)" />
     </Target>

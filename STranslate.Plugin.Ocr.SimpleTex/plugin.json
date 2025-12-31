@@ -1,0 +1,10 @@
+﻿{
+  "PluginID": "8f3c8d30-2b10-4f5a-8b0e-2c9d3e5a7b6f",
+  "Name": "SimpleTex",
+  "Description": "SimpleTex OCR plugin for STranslate",
+  "Author": "User",
+  "Version": "1.0.0",
+  "Website": "https://github.com/STranslate/STranslate.Plugin.Ocr.SimpleTex",
+  "ExecuteFileName": "STranslate.Plugin.Ocr.SimpleTex.dll",
+  "IconPath": "icon.png"
+}

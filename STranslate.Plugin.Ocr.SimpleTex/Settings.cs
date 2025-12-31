@@ -1,6 +1,6 @@
 using System.IO;
 
-namespace STranslate.Plugin.Ocr.Paddle;
+namespace STranslate.Plugin.Ocr.SimpleTex;
 
 public class Settings
 {
@@ -16,5 +16,7 @@ public class Settings
             _defaultPath = value;
         }
     }
-    public string ModelsDirectory { get; set; } = Path.Combine(DefaultPath, "Models");
+    
+    public string AppId { get; set; } = "";
+    public string AppSecret { get; set; } = "";
 }

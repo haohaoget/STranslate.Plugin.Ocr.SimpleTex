@@ -2,7 +2,7 @@ using System.Windows.Controls;
 
 namespace STranslate.Plugin.Ocr.SimpleTex.View
 {
-    public partial class SettingsView : UserControl
+    public partial class SettingsView : System.Windows.Controls.UserControl
     {
         public SettingsView()
         {

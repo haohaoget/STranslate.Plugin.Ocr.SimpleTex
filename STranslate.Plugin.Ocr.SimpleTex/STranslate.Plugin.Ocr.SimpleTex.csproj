@@ -1,30 +1,76 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net10.0-windows</TargetFramework>
-    <Nullable>enable</Nullable>
-    <UseWPF>true</UseWPF>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <AssemblyName>STranslate.Plugin.Ocr.SimpleTex</AssemblyName>
-    <RootNamespace>STranslate.Plugin.Ocr.SimpleTex</RootNamespace>
-    <Platforms>x64</Platforms>
-    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
-  </PropertyGroup>
+    <PropertyGroup>
+        <LangVersion>preview</LangVersion>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <EnableWindowsTargeting>true</EnableWindowsTargeting>
+        <RepositoryUrl>https://github.com/STranslate/STranslate.Plugin.Ocr.SimpleTex</RepositoryUrl>
+        <ManagePackageVersionsCentrally>false</ManagePackageVersionsCentrally>
 
-  <ItemGroup>
-    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
-    <PackageReference Include="Inkore.UI.WPF.Modern" Version="0.10.2.1" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    <PackageReference Include="STranslate.Plugin" Version="1.0.5" />
-  </ItemGroup>
+        <TargetFramework>net10.0-windows</TargetFramework>
+        <UseWPF>true</UseWPF>
+        <UseWindowsForms>true</UseWindowsForms>
+        <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+        <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+        <!--// 确保运行时依赖复制到输出目录 //-->
+        <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <None Update="plugin.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="icon.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+        <DebugSymbols>true</DebugSymbols>
+        <DebugType>portable</DebugType>
+        <Optimize>false</Optimize>
+        <!--// 方便调试 //-->
+        <OutputPath>..\..\..\..\.artifacts\Debug\Plugins\STranslate.Plugin.Ocr.SimpleTex\</OutputPath>
+        <DefineConstants>DEBUG;TRACE</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+        <Prefer32Bit>false</Prefer32Bit>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+        <DebugType>none</DebugType>
+        <Optimize>true</Optimize>
+        <OutputPath>..\.artifacts\</OutputPath>
+        <DefineConstants>TRACE</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+        <Prefer32Bit>false</Prefer32Bit>
+        <!--// 编译后打包为插件 //-->
+        <EnableAutoPackage>true</EnableAutoPackage>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Content Include="Languages\*.*">
+            <Generator>MSBuild:Compile</Generator>
+            <SubType>Designer</SubType>
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <Content Include="icon.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="plugin.json">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+        <PackageReference Include="Inkore.UI.WPF.Modern" Version="0.10.2.1" />
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+        <PackageReference Include="STranslate.Plugin" Version="1.0.5" />
+    </ItemGroup>
+
+    <Target Name="CleanExtraDlls" AfterTargets="Build">
+        <Message Text="Cleaning redundant DLLs in $(OutputPath)" Importance="high" />
+        <ItemGroup>
+            <RedundantDlls Include="$(OutputPath)CommunityToolkit.Mvvm.dll" />
+            <RedundantDlls Include="$(OutputPath)iNKORE.UI.WPF*.dll" />
+            <RedundantDlls Include="$(OutputPath)Microsoft.Extensions*.dll" />
+            <RedundantDlls Include="$(OutputPath)STranslate.Plugin.dll" />
+        </ItemGroup>
+        <Delete Files="@(RedundantDlls)" />
+    </Target>
 
 </Project>
